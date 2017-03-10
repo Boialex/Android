@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <EditText
+        android:id="@+id/FirstName"
+        style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.08"
+        android:ems="10"
+        android:hint="@string/first_name"
+        android:inputType="textPersonName"
+        android:singleLine="false" />
+
+    <EditText
+        android:id="@+id/LastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.08"
+        android:ems="10"
+        android:hint="@string/last_name"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.08"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/Save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:text="@string/Save" />
+</LinearLayout>

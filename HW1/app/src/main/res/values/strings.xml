@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Profile</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="Save">Save</string>
+    <string name="Edit">Edit</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="date">Date</string>
+</resources>

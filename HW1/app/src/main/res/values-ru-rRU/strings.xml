@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Профиль</string>
+    <string name="Save">Сохранить</string>
+    <string name="Edit">Редактировать</string>
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="date">Дата</string>
+</resources>
