@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,14 +46,16 @@ public class MainFragment extends Fragment {
         layout = (LinearLayout)inflater.inflate(R.layout.fragment_main_layout, container, false);
         final EditText firstName = (EditText)layout.findViewById(R.id.FirstName);
         final EditText lastName = (EditText)layout.findViewById(R.id.LastName);
-
+        final Button save = (Button)layout.findViewById(R.id.Save);
+        save.setEnabled(false);
         date = (TextView)layout.findViewById(R.id.Date);
-//        final Calendar today = Calendar.getInstance();
-//        int year = today.get(Calendar.YEAR);
-//        int month = today.get(Calendar.MONTH);
-//        int day = today.get(Calendar.DAY_OF_MONTH);
-//        String dateString = String.valueOf(day) + '.' + String.valueOf(month) + '.' + String.valueOf(year);
-//        date.setText(dateString);
+        Intent previousIntent = getActivity().getIntent();
+        if (previousIntent.getStringExtra("first") != null) {
+            firstName.setText(previousIntent.getStringExtra("first"));
+            lastName.setText(previousIntent.getStringExtra("last"));
+            date.setText(previousIntent.getStringExtra("date"));
+            updateSignInButtonState();
+        }
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +65,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-        final Button save = (Button)layout.findViewById(R.id.Save);
-        save.setEnabled(false);
         save.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -73,6 +74,7 @@ public class MainFragment extends Fragment {
                 currentIntent.putExtra("last", lastName.getText().toString());
                 currentIntent.putExtra("date", date.getText().toString());
                 startActivity(currentIntent);
+                getActivity().finish();
             }
         });
 

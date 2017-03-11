@@ -15,12 +15,13 @@ import android.widget.TextView;
 
 public class InfoActivity extends AppCompatActivity {
     public static final String TAG = InfoActivity.class.getSimpleName();
+    private LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        LinearLayout layout = (LinearLayout)findViewById(R.id.info);
+        layout = (LinearLayout)findViewById(R.id.info);
         final TextView infoFirstName = (TextView)layout.findViewById(R.id.InfoFirstName);
         final TextView infoLastName = (TextView)layout.findViewById(R.id.InfoLastName);
         final TextView infoDate = (TextView)layout.findViewById(R.id.InfoDate);
@@ -34,13 +35,26 @@ public class InfoActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                finish();
+                finistAndStart();
             }
         });
     }
 
+    private void finistAndStart() {
+        final TextView infoFirstName = (TextView)layout.findViewById(R.id.InfoFirstName);
+        final TextView infoLastName = (TextView)layout.findViewById(R.id.InfoLastName);
+        final TextView infoDate = (TextView)layout.findViewById(R.id.InfoDate);
+
+        Intent currentIntent = new Intent(this, MainActivity.class);
+        currentIntent.putExtra("first", infoFirstName.getText().toString());
+        currentIntent.putExtra("last", infoLastName.getText().toString());
+        currentIntent.putExtra("date", infoDate.getText().toString());
+        startActivity(currentIntent);
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
-        finishAffinity();
+        finish();
     }
 }
