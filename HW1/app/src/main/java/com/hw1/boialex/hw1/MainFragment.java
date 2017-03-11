@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import java.util.Calendar;
 public class MainFragment extends Fragment {
     public static final String TAG = MainFragment.class.getSimpleName();
     public TextView date;
+    private LinearLayout layout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,17 +42,17 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setRetainInstance(true);
-        final LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.fragment_main_layout, container, false);
+        layout = (LinearLayout)inflater.inflate(R.layout.fragment_main_layout, container, false);
         final EditText firstName = (EditText)layout.findViewById(R.id.FirstName);
         final EditText lastName = (EditText)layout.findViewById(R.id.LastName);
 
         date = (TextView)layout.findViewById(R.id.Date);
-        final Calendar today = Calendar.getInstance();
-        int year = today.get(Calendar.YEAR);
-        int month = today.get(Calendar.MONTH);
-        int day = today.get(Calendar.DAY_OF_MONTH);
-        String dateString = String.valueOf(day) + '.' + String.valueOf(month) + '.' + String.valueOf(year);
-        date.setText(dateString);
+//        final Calendar today = Calendar.getInstance();
+//        int year = today.get(Calendar.YEAR);
+//        int month = today.get(Calendar.MONTH);
+//        int day = today.get(Calendar.DAY_OF_MONTH);
+//        String dateString = String.valueOf(day) + '.' + String.valueOf(month) + '.' + String.valueOf(year);
+//        date.setText(dateString);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +63,7 @@ public class MainFragment extends Fragment {
         });
 
         final Button save = (Button)layout.findViewById(R.id.Save);
+        save.setEnabled(false);
         save.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -75,4 +79,40 @@ public class MainFragment extends Fragment {
         return layout;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        TextWatcher tw = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                updateSignInButtonState();
+            }
+        };
+
+        final EditText firstName = (EditText) layout.findViewById(R.id.FirstName);
+        final EditText lastName = (EditText) layout.findViewById(R.id.LastName);
+
+        date = (TextView) layout.findViewById(R.id.Date);
+        firstName.addTextChangedListener(tw);
+        lastName.addTextChangedListener(tw);
+        date.addTextChangedListener(tw);
+    }
+
+    private void updateSignInButtonState() {
+        final EditText firstName = (EditText)layout.findViewById(R.id.FirstName);
+        final EditText lastName = (EditText)layout.findViewById(R.id.LastName);
+        date = (TextView) layout.findViewById(R.id.Date);
+        final Button save = (Button)layout.findViewById(R.id.Save);
+        save.setEnabled(firstName.getText().length() > 0 &&
+                        lastName.getText().length() > 0 &&
+                        date.getText().length() > 0);
+    }
 }
