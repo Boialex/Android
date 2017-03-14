@@ -31,7 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.08"
-        android:hint="Date" />
+        android:hint="Date"
+        android:freezesText="true"/>
 
     <Button
         android:id="@+id/Save"

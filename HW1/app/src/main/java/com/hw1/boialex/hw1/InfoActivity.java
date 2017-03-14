@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class InfoActivity extends AppCompatActivity {
-    public static final String TAG = InfoActivity.class.getSimpleName();
+    private static final String TAG = InfoActivity.class.getSimpleName();
     private LinearLayout layout;
 
     @Override

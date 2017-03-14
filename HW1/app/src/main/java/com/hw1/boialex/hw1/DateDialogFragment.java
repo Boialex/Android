@@ -13,7 +13,7 @@ import android.widget.DatePicker;
  */
 
 public class DateDialogFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-    public static final String TAG = DateDialogFragment.class.getSimpleName();
+    private static final String TAG = DateDialogFragment.class.getSimpleName();
 
     @NonNull
     @Override
@@ -32,7 +32,7 @@ public class DateDialogFragment extends DialogFragment implements DatePickerDial
         ((MainFragment)getActivity()
                 .getSupportFragmentManager()
                 .findFragmentByTag(MainFragment.class.getSimpleName()))
-                .date.setText(dateString);
+                .setDateText(dateString);
     }
 
 }

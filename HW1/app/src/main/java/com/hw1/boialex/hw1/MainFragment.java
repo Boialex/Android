@@ -25,12 +25,13 @@ import java.util.Calendar;
 
 
 public class MainFragment extends Fragment {
-    public static final String TAG = MainFragment.class.getSimpleName();
-    public TextView date;
+    private static final String TAG = MainFragment.class.getSimpleName();
+    private TextView date;
     private LinearLayout layout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
     }
 
@@ -42,6 +43,7 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         setRetainInstance(true);
         layout = (LinearLayout)inflater.inflate(R.layout.fragment_main_layout, container, false);
         final EditText firstName = (EditText)layout.findViewById(R.id.FirstName);
@@ -102,10 +104,13 @@ public class MainFragment extends Fragment {
         final EditText firstName = (EditText) layout.findViewById(R.id.FirstName);
         final EditText lastName = (EditText) layout.findViewById(R.id.LastName);
 
-        date = (TextView) layout.findViewById(R.id.Date);
         firstName.addTextChangedListener(tw);
         lastName.addTextChangedListener(tw);
         date.addTextChangedListener(tw);
+    }
+
+    public void setDateText(String newDate) {
+        date.setText(newDate);
     }
 
     private void updateSignInButtonState() {
